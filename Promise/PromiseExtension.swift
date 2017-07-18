@@ -10,7 +10,7 @@ import Foundation
 
 extension Promise {
     
-    func completeOn(queue: DispatchQueue) -> Promise {
+    public func completeOn(queue: DispatchQueue) -> Promise {
         return Promise { complete, _ in
             self.whenComplete { result in
                 queue.async { complete(result) }
@@ -18,7 +18,7 @@ extension Promise {
         }
     }
     
-    func delayed(for delay: DispatchTimeInterval, on queue: DispatchQueue = DispatchQueue.main) -> Promise {
+    public func delayed(for delay: DispatchTimeInterval, on queue: DispatchQueue = DispatchQueue.main) -> Promise {
         return Promise { complete, _ in
             self.whenComplete { result in
                 queue.asyncAfter(deadline: .now() + delay) {
