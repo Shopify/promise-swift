@@ -10,6 +10,14 @@
 		A57655931F16CE3A0085B45C /* Promise.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A57655891F16CE3A0085B45C /* Promise.framework */; };
 		A57655981F16CE3A0085B45C /* PromiseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57655971F16CE3A0085B45C /* PromiseTests.swift */; };
 		A576559A1F16CE3A0085B45C /* Promise.h in Headers */ = {isa = PBXBuildFile; fileRef = A576558C1F16CE3A0085B45C /* Promise.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A57655A41F16CE6F0085B45C /* PromiseCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57655A31F16CE6F0085B45C /* PromiseCore.swift */; };
+		A57655A61F16CE850085B45C /* Atomic.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57655A51F16CE850085B45C /* Atomic.swift */; };
+		A57655A81F16CE950085B45C /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57655A71F16CE950085B45C /* Result.swift */; };
+		A57655AA1F16CECF0085B45C /* PromiseMonadic.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57655A91F16CECF0085B45C /* PromiseMonadic.swift */; };
+		A57655AC1F16CF6A0085B45C /* PromiseExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57655AB1F16CF6A0085B45C /* PromiseExtension.swift */; };
+		A57655AE1F16CF8E0085B45C /* PromiseNoError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57655AD1F16CF8E0085B45C /* PromiseNoError.swift */; };
+		A57655B01F16CFF00085B45C /* PromiseCombination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57655AF1F16CFF00085B45C /* PromiseCombination.swift */; };
+		A57655B21F16D3710085B45C /* PromiseSideEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57655B11F16D3710085B45C /* PromiseSideEffects.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +37,14 @@
 		A57655921F16CE3A0085B45C /* PromiseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PromiseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A57655971F16CE3A0085B45C /* PromiseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromiseTests.swift; sourceTree = "<group>"; };
 		A57655991F16CE3A0085B45C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A57655A31F16CE6F0085B45C /* PromiseCore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PromiseCore.swift; sourceTree = "<group>"; };
+		A57655A51F16CE850085B45C /* Atomic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Atomic.swift; sourceTree = "<group>"; };
+		A57655A71F16CE950085B45C /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
+		A57655A91F16CECF0085B45C /* PromiseMonadic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PromiseMonadic.swift; sourceTree = "<group>"; };
+		A57655AB1F16CF6A0085B45C /* PromiseExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PromiseExtension.swift; sourceTree = "<group>"; };
+		A57655AD1F16CF8E0085B45C /* PromiseNoError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PromiseNoError.swift; sourceTree = "<group>"; };
+		A57655AF1F16CFF00085B45C /* PromiseCombination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PromiseCombination.swift; sourceTree = "<group>"; };
+		A57655B11F16D3710085B45C /* PromiseSideEffects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PromiseSideEffects.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,8 +87,16 @@
 		A576558B1F16CE3A0085B45C /* Promise */ = {
 			isa = PBXGroup;
 			children = (
+				A57655A31F16CE6F0085B45C /* PromiseCore.swift */,
+				A57655A91F16CECF0085B45C /* PromiseMonadic.swift */,
+				A57655AB1F16CF6A0085B45C /* PromiseExtension.swift */,
+				A57655AF1F16CFF00085B45C /* PromiseCombination.swift */,
+				A57655AD1F16CF8E0085B45C /* PromiseNoError.swift */,
+				A57655B11F16D3710085B45C /* PromiseSideEffects.swift */,
 				A576558C1F16CE3A0085B45C /* Promise.h */,
 				A576558D1F16CE3A0085B45C /* Info.plist */,
+				A57655A51F16CE850085B45C /* Atomic.swift */,
+				A57655A71F16CE950085B45C /* Result.swift */,
 			);
 			path = Promise;
 			sourceTree = "<group>";
@@ -149,6 +173,7 @@
 					A57655881F16CE3A0085B45C = {
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = F8R5D22HF7;
+						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 					};
 					A57655911F16CE3A0085B45C = {
@@ -198,6 +223,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A57655B01F16CFF00085B45C /* PromiseCombination.swift in Sources */,
+				A57655A81F16CE950085B45C /* Result.swift in Sources */,
+				A57655AE1F16CF8E0085B45C /* PromiseNoError.swift in Sources */,
+				A57655AA1F16CECF0085B45C /* PromiseMonadic.swift in Sources */,
+				A57655A61F16CE850085B45C /* Atomic.swift in Sources */,
+				A57655A41F16CE6F0085B45C /* PromiseCore.swift in Sources */,
+				A57655AC1F16CF6A0085B45C /* PromiseExtension.swift in Sources */,
+				A57655B21F16D3710085B45C /* PromiseSideEffects.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -324,6 +357,7 @@
 		A576559E1F16CE3A0085B45C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = F8R5D22HF7;
@@ -336,6 +370,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.shopify.Promise;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -343,6 +378,7 @@
 		A576559F1F16CE3A0085B45C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = F8R5D22HF7;
@@ -362,6 +398,7 @@
 		A57655A11F16CE3A0085B45C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = F8R5D22HF7;
 				INFOPLIST_FILE = PromiseTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -374,6 +411,7 @@
 		A57655A21F16CE3A0085B45C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = F8R5D22HF7;
 				INFOPLIST_FILE = PromiseTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
