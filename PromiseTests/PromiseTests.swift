@@ -165,11 +165,9 @@ class PromiseTests: XCTestCase {
         
         verifytCancelled(promise: Promise<Int, NoError>(value: 42), after: .milliseconds(10))
         verifytCancelled(promise: Promise<Int, TestError>(error: .error1), after: .milliseconds(10))
-        verifytCancelled(promise: Promise<Void, NoError> { complete, _ in
-            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1)) {
-                complete(.success(()))
-            }
-        }, after: .milliseconds(10))
+        verifytCancelled(
+            promise: makeAsyncPromise(result: .success(42), delay: .milliseconds(1)),
+            after: .milliseconds(10))
     }
     
     func testThen() {
