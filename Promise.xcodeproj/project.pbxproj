@@ -18,6 +18,7 @@
 		A57655AE1F16CF8E0085B45C /* PromiseNoError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57655AD1F16CF8E0085B45C /* PromiseNoError.swift */; };
 		A57655B01F16CFF00085B45C /* PromiseCombination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57655AF1F16CFF00085B45C /* PromiseCombination.swift */; };
 		A57655B21F16D3710085B45C /* PromiseSideEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57655B11F16D3710085B45C /* PromiseSideEffects.swift */; };
+		A5FDAE441F1EB79A00B1C8CE /* PrimseSideEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5FDAE431F1EB79A00B1C8CE /* PrimseSideEffects.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +46,7 @@
 		A57655AD1F16CF8E0085B45C /* PromiseNoError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PromiseNoError.swift; sourceTree = "<group>"; };
 		A57655AF1F16CFF00085B45C /* PromiseCombination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PromiseCombination.swift; sourceTree = "<group>"; };
 		A57655B11F16D3710085B45C /* PromiseSideEffects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PromiseSideEffects.swift; sourceTree = "<group>"; };
+		A5FDAE431F1EB79A00B1C8CE /* PrimseSideEffects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrimseSideEffects.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +108,7 @@
 			children = (
 				A57655971F16CE3A0085B45C /* PromiseTests.swift */,
 				A57655991F16CE3A0085B45C /* Info.plist */,
+				A5FDAE431F1EB79A00B1C8CE /* PrimseSideEffects.swift */,
 			);
 			path = PromiseTests;
 			sourceTree = "<group>";
@@ -239,6 +242,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A57655981F16CE3A0085B45C /* PromiseTests.swift in Sources */,
+				A5FDAE441F1EB79A00B1C8CE /* PrimseSideEffects.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -440,6 +444,7 @@
 				A576559F1F16CE3A0085B45C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A57655A01F16CE3A0085B45C /* Build configuration list for PBXNativeTarget "PromiseTests" */ = {
 			isa = XCConfigurationList;
@@ -448,6 +453,7 @@
 				A57655A21F16CE3A0085B45C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -23,6 +23,7 @@ enum TestError: Error {
     case error1, error2
 }
 
+
 extension TestError: Equatable {
     static func ==(lhs: TestError, rhs: TestError) -> Bool {
         switch (lhs, rhs) {
@@ -38,6 +39,14 @@ extension Array where Element: Equatable {
         guard self.count == another.count else { return false }
         
         return zip(self, another).filter { $0.0 != $0.1 }.count == 0
+    }
+}
+
+func makeAsyncPromise<V>(result: Result<V, TestError>, delay: DispatchTimeInterval) -> Promise<V, TestError> {
+    return Promise<V, TestError> { complete, _ in
+        DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+            complete(result)
+        }
     }
 }
 
@@ -72,13 +81,6 @@ class PromiseTests: XCTestCase {
         XCTAssertPromiseResult(promise, result: .error(error), after: delay, file: file, line: line)
     }
     
-    func makeAsyncPromise<V>(result: Result<V, TestError>, delay: DispatchTimeInterval) -> Promise<V, TestError> {
-        return Promise<V, TestError> { complete, _ in
-            DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-                complete(result)
-            }
-        }
-    }
     
     func testPromiseUnit() {
         
@@ -173,7 +175,7 @@ class PromiseTests: XCTestCase {
     func testThen() {
         let p1 = makeAsyncPromise(result: .success(42), delay: .milliseconds(100))
         let p2 = {(v: Int) in
-            self.makeAsyncPromise(result: .success(v + 10), delay: .milliseconds(100))
+            makeAsyncPromise(result: .success(v + 10), delay: .milliseconds(100))
         }
         
         let promise = p1.then(transform: p2)
@@ -184,7 +186,7 @@ class PromiseTests: XCTestCase {
     func testIfErrorThen() {
         let promise = makeAsyncPromise(result: .error(.error1), delay: .milliseconds(100))
             .ifErrorThen { _ in
-                return self.makeAsyncPromise(result: .success(42), delay: .milliseconds(100))
+                return makeAsyncPromise(result: .success(42), delay: .milliseconds(100))
         }
         
         XCTAssertPromiseValue(promise, value: 42, after: 0.300)
