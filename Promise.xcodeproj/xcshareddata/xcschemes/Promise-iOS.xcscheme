@@ -16,7 +16,7 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "A57655881F16CE3A0085B45C"
                BuildableName = "Promise.framework"
-               BlueprintName = "Promise"
+               BlueprintName = "Promise-iOS"
                ReferencedContainer = "container:Promise.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -33,8 +33,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "A57655911F16CE3A0085B45C"
-               BuildableName = "PromiseTests.xctest"
-               BlueprintName = "PromiseTests"
+               BuildableName = "PromiseTests-iOS.xctest"
+               BlueprintName = "PromiseTests-iOS"
                ReferencedContainer = "container:Promise.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -44,7 +44,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "A57655881F16CE3A0085B45C"
             BuildableName = "Promise.framework"
-            BlueprintName = "Promise"
+            BlueprintName = "Promise-iOS"
             ReferencedContainer = "container:Promise.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -66,7 +66,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "A57655881F16CE3A0085B45C"
             BuildableName = "Promise.framework"
-            BlueprintName = "Promise"
+            BlueprintName = "Promise-iOS"
             ReferencedContainer = "container:Promise.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -84,7 +84,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "A57655881F16CE3A0085B45C"
             BuildableName = "Promise.framework"
-            BlueprintName = "Promise"
+            BlueprintName = "Promise-iOS"
             ReferencedContainer = "container:Promise.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

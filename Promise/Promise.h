@@ -6,7 +6,7 @@
 //  Copyright © 2017 Shopify. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 
 //! Project version number for Promise.
 FOUNDATION_EXPORT double PromiseVersionNumber;
