@@ -12,6 +12,7 @@ Promise represents a value that may be available in future. Technically, it's a 
 4. `Promise-swift` is thread-safe: async computations and observing can be triggered from different threads.
 5. `Promise-swift` is cancelable: async computation wrapper API provides a way to retain canceling action.
 6. `Promise-swift` is a continuation monad: you can use `then` and to chain multiple async computations.
+7. Last but not least: `Promise-swift` is very lightweight, built on top of GCD.
 
 ## Basic usage
 
