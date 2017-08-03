@@ -8,7 +8,7 @@ Promise represents a value that may be available in future. Technically, it's a 
 `Promise-swift` is heavily influenced by Node.js `Promise` implementation in terms of API and by [ReactiveSwift](link here)'s `Signal` implementation in internal design. Notably:
 1. `Promise-swift` is cold: async computation the promise represents will only be executed when promise is first observed using `whenComplete` method.
 2. `Promise-swift` is buffered: once value computed subsequent calls to `whenComplete` will not trigger async computation again.
-3. `Promise-swift` is parameterized with both value _and_ error.
+3. `Promise-swift` is parameterized with both value _and_ error: `Promise<Int, SomeError>`
 4. `Promise-swift` is thread-safe: async computations and observing can be triggered from different threads.
 5. `Promise-swift` is cancelable: async computation wrapper API provides a way to retain canceling action.
 6. `Promise-swift` is a continuation monad: you can use `then` and to chain multiple async computations.
@@ -86,6 +86,7 @@ let finalResultPromise<String, NoError> = step1Promise
 }
 ```
 **Note**: Next promise in the chain can transform type of the value, but not type of the error. 
+
 
 
 
