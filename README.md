@@ -6,7 +6,7 @@ Promise represents a value that may be available in future. Technically, it's a 
 
 ## Features
 `Promise-swift` is heavily influenced by Node.js `Promise` implementation in terms of API and by [ReactiveSwift](https://github.com/ReactiveCocoa/ReactiveSwift)'s `Signal` implementation in internal design. Notably:
-1. `Promise-swift` is cold: async computation the promise represents will only start execution when promise is first observed using `whenComplete` method. This allows promise to be created in one place but used in the other.
+1. `Promise-swift` is cold: the async computation that the promise represents will only start execution when promise is first observed using `whenComplete` method. This allows the promise to be created in one place but triggered in another.
 2. `Promise-swift` is buffered: once value computed subsequent calls to `whenComplete` will not trigger async computation again.
 3. `Promise-swift` is parameterized with both value _and_ error: `Promise<Int, SomeError>`
 4. `Promise-swift` is thread-safe: async computations and observing can be triggered from different threads.
@@ -21,7 +21,7 @@ There are 2 ways of creating a promise instance:
 
 1. With fixed value of computations result, as if computation was already done:
 ```swift
-let valuePromise = Promsie<Int, NoError>(value: 42)
+let valuePromise = Promise<Int, NoError>(value: 42)
 ```
 2. with async computation provided as parameter:
 ```swift
@@ -35,7 +35,7 @@ let asyncValuePromise = Promise<Int, NoError> { resolver in
 ```
 
 ### Cancellation
-Promise can be canceled by calling `cancel` on it. That guarantees that after this promise will not resolve with any value on observers regardless of whether running computation completed or not. 
+Promise can be canceled by calling `cancel` on it. That guarantees that after this promise will not resolve with any value on observers regardless of whether running computation completed or not.
 
 You can also provide custom logic for what to do when `cancel` was called:
 ```swift
@@ -47,10 +47,45 @@ let cancellablePromise = Promise<Int, NoError> { resolver in
     }
     resolver.onCancel = { 
         // cancel may be called on any thread, this makes sure we're thread-safe
-        DispatchQueue.main.async { cancelled = true} 
+        DispatchQueue.main.async { cancelled = true}
     }
 }
 ```
+
+#### QUESTION
+Is modifying an inout paramter like this a typical Swift pattern these days?
+I've been out of the Swift game for a while, but this confused me, because I thought "Oh, how does changing this variable affect the caller?"
+
+RxSwift used to have the create function return the cancel method equivalent. (It maybe still does)
+That would make your code more like:
+
+```swift
+let cancellablePromise = Promise<Int, NoError> { complete in
+    var cancelled = false
+    DispatchQueue.main.after(.now() + .seconds(3)) {
+        guard cancelled == false else { return }
+        complete(.success(42))
+    }
+    return {
+        // cancel may be called on any thread, this makes sure we're thread-safe
+        DispatchQueue.main.async { cancelled = true}
+    }
+}
+```
+
+with the disadvantage that the normal case where you don't care about cancel would have to become:
+```swift
+let asyncValuePromise = Promise<Int, NoError> { complete in
+    //pretend we do something heavy
+    DispatchQueue.main.after(.now() + .seconds(3)) {
+        // done, return result
+        complete(.success(42))
+    }
+    return DefaultCleanup // or NoCleanup or something
+}
+```
+
+I don't know where the preference lies, I'm just offering alternatives.
 
 ### Observing
 `Promise` can be observed for resolution using `whenComplete`:
@@ -86,7 +121,11 @@ let finalResultPromise<String, NoError> = step1Promise
     }
 }
 ```
-**Note**: Next promise in the chain can transform type of the value, but not type of the error. 
+**Note**: Next promise in the chain can transform type of the value, but not type of the error.
+
+#### QUESTION
+When chaining multiple promises together, how should the `cancel` be expected to behave?
+Will it call the cancel function of all items, or only the step it's on, or the step it's on an all that follow (are still pending), etc?
 
 
 
@@ -100,4 +139,4 @@ let finalResultPromise<String, NoError> = step1Promise
 
 ## Contributing
 Fork, branch & pull request.
-    
+
