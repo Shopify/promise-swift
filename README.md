@@ -1,11 +1,11 @@
 # Promise
-This is a swift framework implementing [promise](link to wiki here) pattern.
+This is a swift framework implementing [promise](https://en.wikipedia.org/wiki/Futures_and_promises) pattern.
 
 ## What is Promise?
-Promise represents a value that may be available in future. Technically, it's a wrapper for an async function with result returned via callback. Besides being an async computation wrapper, Promise can also be implemented as a [continuation monad](link to continuation monad here) opening up a new way of solving many problems related to async computations.
+Promise represents a value that may be available in future. Technically, it's a wrapper for an async function with result returned via callback. Besides being an async computation wrapper, Promise can also act as [continuation monad](https://en.wikipedia.org/wiki/Monad_(functional_programming)#Continuation_monad) opening up a new way of solving many problems related to async computations.
 
 ## Features
-`Promise-swift` is heavily influenced by Node.js `Promise` implementation in terms of API and by [ReactiveSwift](link here)'s `Signal` implementation in internal design. Notably:
+`Promise-swift` is heavily influenced by Node.js `Promise` implementation in terms of API and by [ReactiveSwift](https://github.com/ReactiveCocoa/ReactiveSwift)'s `Signal` implementation in internal design. Notably:
 1. `Promise-swift` is cold: async computation the promise represents will only be executed when promise is first observed using `whenComplete` method.
 2. `Promise-swift` is buffered: once value computed subsequent calls to `whenComplete` will not trigger async computation again.
 3. `Promise-swift` is parameterized with both value _and_ error: `Promise<Int, SomeError>`
