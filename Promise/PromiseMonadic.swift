@@ -11,7 +11,7 @@ import Foundation
 extension Promise {
     
     private func commonThen<T1, E1: Error>(transform: @escaping (Result<T, E>) -> Promise<T1, E1>) -> Promise<T1, E1> {
-        return Promise<T1, E1> { complete, cancel in
+        return Promise<T1, E1> { resolver in
             let serialQueue = DispatchQueue(label: "serialiazation")
             
             var innerCancel: PromiseCancelFunction = {}
@@ -24,10 +24,10 @@ extension Promise {
                 
                 let innerPromise = transform(result)
                 serialQueue.sync { innerCancel = innerPromise.cancel }
-                innerPromise.whenComplete(callback: complete)
+                innerPromise.whenComplete(callback: resolver.complete)
                 
             }
-            cancel = {
+            resolver.onCancel = {
                 serialQueue.sync {
                     cancelled = true
                     innerCancel()

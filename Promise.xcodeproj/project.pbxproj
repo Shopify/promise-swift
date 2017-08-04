@@ -87,7 +87,7 @@
 		A57655921F16CE3A0085B45C /* PromiseTests-iOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PromiseTests-iOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A57655971F16CE3A0085B45C /* PromiseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromiseTests.swift; sourceTree = "<group>"; };
 		A57655991F16CE3A0085B45C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A57655A31F16CE6F0085B45C /* PromiseCore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PromiseCore.swift; sourceTree = "<group>"; };
+		A57655A31F16CE6F0085B45C /* PromiseCore.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = PromiseCore.swift; sourceTree = "<group>"; tabWidth = 2; };
 		A57655A51F16CE850085B45C /* Atomic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Atomic.swift; sourceTree = "<group>"; };
 		A57655A71F16CE950085B45C /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		A57655A91F16CECF0085B45C /* PromiseMonadic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PromiseMonadic.swift; sourceTree = "<group>"; };

@@ -12,20 +12,20 @@ import Foundation
 extension Promise {
     
     public func onStart(do action: @escaping () -> Void) -> Promise {
-        return Promise { complete, cancel in
+        return Promise { resolver in
             action()
-            self.whenComplete(callback: complete)
-            cancel = { self.cancel() }
+            self.whenComplete(callback: resolver.complete)
+            resolver.onCancel = { self.cancel() }
         }
     }
     
     public func onComplete(do action: @escaping (Result<T, E>) -> Void) -> Promise {
-        return Promise { complete, cancel in
+        return Promise { resolver in
             self.whenComplete { result in
                 action(result)
-                complete(result)
+                resolver.complete(result)
             }
-            cancel = { self.cancel() }
+            resolver.onCancel = { self.cancel() }
         }
     }
     

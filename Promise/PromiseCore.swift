@@ -13,7 +13,7 @@ import Foundation
 public enum NoError: Error {}
 
 public typealias PromiseCallback<T, E: Error> = (Result<T, E>) -> Void
-public typealias PromiseStartFunction<T, E: Error> = (@escaping PromiseCallback<T, E>, inout PromiseCancelFunction) -> Void
+public typealias PromiseStartFunction<T, E: Error> = (PromiseResolver<T, E>) -> Void
 public typealias PromiseCancelFunction = () -> Void
 
 fileprivate enum PromiseState<T, E: Error> {
@@ -33,6 +33,24 @@ fileprivate enum PromiseState<T, E: Error> {
     default:()
     }
   }
+}
+
+public class PromiseResolver<T, E: Error> {
+  public var onCancel: PromiseCancelFunction?
+  private(set) public var complete: PromiseCallback<T, E>
+  
+  fileprivate init(complete: @escaping PromiseCallback<T, E>) {
+    self.complete = complete
+  }
+  
+  public func resolve(with value: T) {
+    complete(.success(value))
+  }
+  
+  public func reject(with error: E) {
+    complete(.error(error))
+  }
+  
 }
 
 final public class Promise<T, E: Error> {
@@ -85,15 +103,17 @@ final public class Promise<T, E: Error> {
     self.state.modify { state in
       guard case .pending(let start, let callbacks) = state else { return }
       
-      var cancelFunc: PromiseCancelFunction = {}
-      let cancel: PromiseCancelFunction  = {
-        cancelFunc()
-      }
-      state = .executing(cancel, callbacks)
       func complete(result: Result<T, E>) {
         self.state.modify { $0 = .complete(result) }
       }
-      start(complete, &cancelFunc)
+
+      let resolver = PromiseResolver(complete: complete)
+      let cancel: PromiseCancelFunction  = {
+        resolver.onCancel?()
+      }
+      state = .executing(cancel, callbacks)
+      
+      start(resolver)
     }
   }
   
