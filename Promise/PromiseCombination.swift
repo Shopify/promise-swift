@@ -11,7 +11,7 @@ import Foundation
 extension Promise {
     
     public static func all<S: Sequence>(_ promises: S, on queue: DispatchQueue = DispatchQueue.main) -> Promise<[T], E> where S.Iterator.Element == Promise<T, E> {
-        return Promise<[T], E> { complete, cancel in
+        return Promise<[T], E> { resolver in
             let group = DispatchGroup()
             let serialQueue = DispatchQueue(label: "serial")
             
@@ -34,16 +34,16 @@ extension Promise {
                         group.leave()
                     case .error(let e):
                         cancelOthers(index)
-                        complete(.error(e))
+                        resolver.reject(with: e)
                     }
                 }
             }
             
             group.notify(queue: queue) {
-                complete(.success(results.flatMap { $0 } ))
+                resolver.resolve(with: results.flatMap { $0 } )
             }
             
-            cancel = {
+            resolver.onCancel = {
                 for promise in promises {
                     promise.cancel()
                 }

@@ -43,9 +43,9 @@ extension Array where Element: Equatable {
 }
 
 func makeAsyncPromise<V>(result: Result<V, TestError>, delay: DispatchTimeInterval) -> Promise<V, TestError> {
-    return Promise<V, TestError> { complete, _ in
+    return Promise<V, TestError> { resolver in
         DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-            complete(result)
+            resolver.complete(result)
         }
     }
 }
@@ -131,8 +131,8 @@ class PromiseTests: XCTestCase {
     
     func testCancellablePromiseCancel() {
         var cancelled = false
-        let promise = Promise<Void, TestError> { complete, cancel in
-            cancel = { cancelled = true }
+        let promise = Promise<Void, TestError> { resolver in
+            resolver.onCancel = { cancelled = true }
         }
         
         //start
@@ -240,8 +240,8 @@ class PromiseTests: XCTestCase {
     
     func testPromiseAllCancelOnFail() {
         let exp = expectation(description: "cancelled called")
-        let successPromise = Promise<Int, TestError> {_, cancel in
-            cancel = {
+        let successPromise = Promise<Int, TestError> { resolver in
+            resolver.onCancel = {
                 exp.fulfill()
             }
         }

@@ -37,6 +37,6 @@ extension Promise {
     }
     
     public static func never() -> Promise {
-        return Promise {_, _ in }
+        return Promise {_ in }
     }
 }

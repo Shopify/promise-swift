@@ -11,18 +11,18 @@ import Foundation
 extension Promise {
     
     public func completeOn(queue: DispatchQueue) -> Promise {
-        return Promise { complete, _ in
+        return Promise { resolver in
             self.whenComplete { result in
-                queue.async { complete(result) }
+                queue.async { resolver.complete(result) }
             }
         }
     }
     
     public func delayed(for delay: DispatchTimeInterval, on queue: DispatchQueue = DispatchQueue.main) -> Promise {
-        return Promise { complete, _ in
+        return Promise { resolver in
             self.whenComplete { result in
                 queue.asyncAfter(deadline: .now() + delay) {
-                    complete(result)
+                    resolver.complete(result)
                 }
             }
         }
