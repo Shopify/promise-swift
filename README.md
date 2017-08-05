@@ -6,7 +6,7 @@ Promise represents a value that may be available in future. Technically, it's a 
 
 ## Features
 `Promise-swift` is heavily influenced by Node.js `Promise` implementation in terms of API and by [ReactiveSwift](https://github.com/ReactiveCocoa/ReactiveSwift)'s `Signal` implementation in internal design. Notably:
-1. `Promise-swift` is cold: async computation the promise represents will only start execution when promise is first observed using `whenComplete` method. This allows promise to be created in one place but used in the other.
+1. `Promise-swift` is cold: the async computation that the promise represents will only start execution when promise is first observed using `whenComplete` method. This allows the promise to be created in one place but triggered in another.
 2. `Promise-swift` is buffered: once value computed subsequent calls to `whenComplete` will not trigger async computation again.
 3. `Promise-swift` is parameterized with both value _and_ error: `Promise<Int, SomeError>`
 4. `Promise-swift` is thread-safe: async computations and observing can be triggered from different threads.
@@ -21,7 +21,7 @@ There are 2 ways of creating a promise instance:
 
 1. With fixed value of computations result, as if computation was already done:
 ```swift
-let valuePromise = Promsie<Int, NoError>(value: 42)
+let valuePromise = Promise<Int, NoError>(value: 42)
 ```
 2. with async computation provided as parameter:
 ```swift
@@ -35,7 +35,7 @@ let asyncValuePromise = Promise<Int, NoError> { resolver in
 ```
 
 ### Cancellation
-Promise can be canceled by calling `cancel` on it. That guarantees that after this promise will not resolve with any value on observers regardless of whether running computation completed or not. 
+Promise can be canceled by calling `cancel` on it. That guarantees that after this promise will not resolve with any value on observers regardless of whether running computation completed or not.
 
 You can also provide custom logic for what to do when `cancel` was called:
 ```swift
@@ -47,7 +47,7 @@ let cancellablePromise = Promise<Int, NoError> { resolver in
     }
     resolver.onCancel = { 
         // cancel may be called on any thread, this makes sure we're thread-safe
-        DispatchQueue.main.async { cancelled = true} 
+        DispatchQueue.main.async { cancelled = true}
     }
 }
 ```
@@ -86,8 +86,7 @@ let finalResultPromise<String, NoError> = step1Promise
     }
 }
 ```
-**Note**: Next promise in the chain can transform type of the value, but not type of the error. 
-
+**Note**: Next promise in the chain can transform type of the value, but not type of the error.
 
 
 
@@ -100,4 +99,4 @@ let finalResultPromise<String, NoError> = step1Promise
 
 ## Contributing
 Fork, branch & pull request.
-    
+
