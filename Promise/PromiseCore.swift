@@ -106,7 +106,7 @@ final public class Promise<T, E: Error> {
       func complete(result: Result<T, E>) {
         self.state.modify { $0 = .complete(result) }
       }
-
+      
       let resolver = PromiseResolver(complete: complete)
       let cancel: PromiseCancelFunction  = {
         resolver.onCancel?()
@@ -125,14 +125,14 @@ final public class Promise<T, E: Error> {
   
   public func cancel() {
     state.modify {
-        switch $0 {
-        case .cancelled: break
-        case .executing(let cancelFunc, _):
-            $0 = .cancelled
-            cancelFunc()
-        case .pending, .complete:
-            $0 = .cancelled
-        }
+      switch $0 {
+      case .cancelled: break
+      case .executing(let cancelFunc, _):
+        $0 = .cancelled
+        cancelFunc()
+      case .pending, .complete:
+        $0 = .cancelled
+      }
     }
   }
 }
