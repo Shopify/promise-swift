@@ -6,5 +6,5 @@ rvm:
 before_install:
     - gem install xcpretty
 script:
-    - xcodebuild test -project Promise.xcodeproj -scheme Promise-iOS -destination 'platform=iOS Simulator,name=iPhone SE,OS=10.3' | xcpretty -c 
+    - xcodebuild test -project Promise.xcodeproj -scheme Promise-iOS -destination 'platform=iOS Simulator,name=iPhone SE' | xcpretty -c 
     - xcodebuild test -project Promise.xcodeproj -scheme Promise-macOS -destination 'platform=OS X,arch=x86_64' | xcpretty -c 
