@@ -1,4 +1,5 @@
 # Promise
+[![Build Status](https://travis-ci.org/Shopify/promise-swift.svg?branch=master)](https://travis-ci.org/Shopify/promise-swift)
 This is a swift framework implementing [promise](https://en.wikipedia.org/wiki/Futures_and_promises) pattern.
 
 ## What is Promise?
