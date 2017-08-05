@@ -1,0 +1,10 @@
+language: objective-c
+osx_image: xcode8.3
+rvm:
+    2.2.5
+
+before_install:
+    - gem install xcpretty
+script:
+    - xcodebuild test -project Promise.xcodeproj -scheme Promise-iOS -destination 'platform=iOS Simulator,name=iPhone SE,OS=10.3' | xcpretty -c 
+    - xcodebuild test -project Promise.xcodeproj -scheme Promise-macOS -destination 'platform=OS X,arch=x86_64' | xcpretty -c 
