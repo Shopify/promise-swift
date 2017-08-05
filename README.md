@@ -52,41 +52,6 @@ let cancellablePromise = Promise<Int, NoError> { resolver in
 }
 ```
 
-#### QUESTION
-Is modifying an inout paramter like this a typical Swift pattern these days?
-I've been out of the Swift game for a while, but this confused me, because I thought "Oh, how does changing this variable affect the caller?"
-
-RxSwift used to have the create function return the cancel method equivalent. (It maybe still does)
-That would make your code more like:
-
-```swift
-let cancellablePromise = Promise<Int, NoError> { complete in
-    var cancelled = false
-    DispatchQueue.main.after(.now() + .seconds(3)) {
-        guard cancelled == false else { return }
-        complete(.success(42))
-    }
-    return {
-        // cancel may be called on any thread, this makes sure we're thread-safe
-        DispatchQueue.main.async { cancelled = true}
-    }
-}
-```
-
-with the disadvantage that the normal case where you don't care about cancel would have to become:
-```swift
-let asyncValuePromise = Promise<Int, NoError> { complete in
-    //pretend we do something heavy
-    DispatchQueue.main.after(.now() + .seconds(3)) {
-        // done, return result
-        complete(.success(42))
-    }
-    return DefaultCleanup // or NoCleanup or something
-}
-```
-
-I don't know where the preference lies, I'm just offering alternatives.
-
 ### Observing
 `Promise` can be observed for resolution using `whenComplete`:
 ```swift
@@ -122,11 +87,6 @@ let finalResultPromise<String, NoError> = step1Promise
 }
 ```
 **Note**: Next promise in the chain can transform type of the value, but not type of the error.
-
-#### QUESTION
-When chaining multiple promises together, how should the `cancel` be expected to behave?
-Will it call the cancel function of all items, or only the step it's on, or the step it's on an all that follow (are still pending), etc?
-
 
 
 
