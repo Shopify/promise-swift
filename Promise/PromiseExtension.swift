@@ -30,6 +30,26 @@ extension Promise {
   }
   
   
+  /// Dispatch `Promise` async operation
+  ///
+  /// Creates new `Promise` whose start function dispatches execution of current `Promise`'s one on a
+  /// given GCD queue.
+  /// **Note**: this does not modify current `Promise`, only returned instance is guaranteed to
+  /// to use queue for scheduling.
+  ///
+  /// - Parameter queue: GCD queue to schedule start operation on
+  /// - Returns: new `Promise`instance.
+  
+  public func srartOn(queue: DispatchQueue) -> Promise {
+    return Promise { resolver in
+      queue.async {
+        self.whenComplete(callback: resolver.complete)
+      }
+      resolver.onCancel = { self.cancel() }
+    }
+  }
+  
+  
   /// Injects a delay in async computation process.
   ///
   /// Creates new `Promise` which adds a given delay (using `disatchAfter` on a given queue)
