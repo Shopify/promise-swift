@@ -95,6 +95,7 @@
 		A57655AD1F16CF8E0085B45C /* PromiseNoError.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = PromiseNoError.swift; sourceTree = "<group>"; tabWidth = 2; };
 		A57655AF1F16CFF00085B45C /* PromiseCombination.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = PromiseCombination.swift; sourceTree = "<group>"; tabWidth = 2; };
 		A57655B11F16D3710085B45C /* PromiseSideEffects.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = PromiseSideEffects.swift; sourceTree = "<group>"; tabWidth = 2; };
+		A5B62D241F39ECDE00CFF565 /* TestPromiseScheduling.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestPromiseScheduling.swift; sourceTree = "<group>"; };
 		A5F0A1131F32054200C780DC /* Promise.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Promise.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5FDAE431F1EB79A00B1C8CE /* PrimseSideEffects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrimseSideEffects.swift; sourceTree = "<group>"; };
 		A5FF4AD91F3218DA00921161 /* Promise.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Promise.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -217,6 +218,7 @@
 				A57655971F16CE3A0085B45C /* PromiseTests.swift */,
 				A57655991F16CE3A0085B45C /* Info.plist */,
 				A5FDAE431F1EB79A00B1C8CE /* PrimseSideEffects.swift */,
+				A5B62D241F39ECDE00CFF565 /* TestPromiseScheduling.swift */,
 			);
 			path = PromiseTests;
 			sourceTree = "<group>";
@@ -527,6 +529,7 @@
 			files = (
 				A57655981F16CE3A0085B45C /* PromiseTests.swift in Sources */,
 				A5FDAE441F1EB79A00B1C8CE /* PrimseSideEffects.swift in Sources */,
+				A5B62D251F39ECDE00CFF565 /* TestPromiseScheduling.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

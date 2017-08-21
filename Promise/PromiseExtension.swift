@@ -8,6 +8,21 @@
 
 import Foundation
 
+public protocol DispatchQueueType {
+  func async(execute work: DispatchWorkItem)
+  func asyncAfter(deadline: DispatchTime, execute work: DispatchWorkItem)
+}
+
+extension DispatchQueue: DispatchQueueType {
+//  public func async(execute work: @escaping () -> Void) {
+//    self.async(execute: work)
+//  }
+//  
+//  public func asyncAfter(deadline: DispatchTime, execute work: @escaping () -> Void) {
+//    self.asyncAfter(deadline: deadline, execute: work)
+//  }
+}
+
 extension Promise {
   
   
@@ -21,10 +36,10 @@ extension Promise {
   /// - Parameter queue: queue to schedule observers callback on
   /// - Returns: new `Promise` instance.
   
-  public func completeOn(queue: DispatchQueue) -> Promise {
+  public func completeOn(queue: DispatchQueueType) -> Promise {
     return Promise { resolver in
       self.whenComplete { result in
-        queue.async { resolver.complete(result) }
+        queue.async(execute: DispatchWorkItem { resolver.complete(result) } )
       }
     }
   }
@@ -40,11 +55,12 @@ extension Promise {
   /// - Parameter queue: GCD queue to schedule start operation on
   /// - Returns: new `Promise`instance.
   
-  public func srartOn(queue: DispatchQueue) -> Promise {
+  public func startOn(queue: DispatchQueueType) -> Promise {
     return Promise { resolver in
-      queue.async {
+      let workItem = DispatchWorkItem {
         self.whenComplete(callback: resolver.complete)
       }
+      queue.async(execute: workItem)
       resolver.onCancel = { self.cancel() }
     }
   }
@@ -60,12 +76,12 @@ extension Promise {
   ///   - queue: queue to schedule `dispatchAfter` on
   /// - Returns: new `Promise` instance.
   
-  public func delayed(for delay: DispatchTimeInterval, on queue: DispatchQueue = DispatchQueue.main) -> Promise {
+  public func delayed(for delay: DispatchTimeInterval, on queue: DispatchQueueType = DispatchQueue.main) -> Promise {
     return Promise { resolver in
       self.whenComplete { result in
-        queue.asyncAfter(deadline: .now() + delay) {
+        queue.asyncAfter(deadline: .now() + delay, execute: DispatchWorkItem {
           resolver.complete(result)
-        }
+        })
       }
     }
   }
