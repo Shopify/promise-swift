@@ -50,8 +50,7 @@ func makeAsyncPromise<V>(result: Result<V, TestError>, delay: DispatchTimeInterv
     }
 }
 
-
-class PromiseTests: XCTestCase {
+extension XCTestCase {
     
     func XCTAssertPromiseResult<V: Equatable, E: Error&Equatable>(
         _ promise: Promise<V, E>,
@@ -71,6 +70,10 @@ class PromiseTests: XCTestCase {
         XCTAssert(expected?.isEqual(to: result) ?? false, file: file, line: line)
         
     }
+}
+
+class PromiseTests: XCTestCase {
+    
     
     
     func XCTAssertPromiseValue<V: Equatable, E: Error & Equatable>(_ promise:Promise<V, E>, value:V, after delay: TimeInterval, file: StaticString = #file, line: UInt = #line) {
