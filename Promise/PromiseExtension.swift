@@ -75,12 +75,17 @@ extension Promise {
 
 extension Promise {
   
-  /// Creates promise that performs retrying action
+  /// Creates retry promise based off given promise
   ///
+  /// This will create a Promise that can recover from failure.
+  /// Generator is used to create action promise that can fail. Since Promise retains
+  /// it's failure status, need to create new filable action Promise on every attempt.
+  /// Resulting Promise will wait repeat up until `count` retries after which will reject
+  /// with the error underlying process was rejected with.
   /// - Parameters:
-  ///   - count: <#count description#>
-  ///   - promiseGenrator: <#promiseGenrator description#>
-  /// - Returns: <#return value description#>
+  ///   - count: number of attempts to try.
+  ///   - promiseGenrator: function generating new Promise to try.
+  /// - Returns: new Promise instance.
   public static func attempt(times count: Int, promiseGenrator: @escaping () -> Promise) -> Promise {
 
     func tryPromise(attemptsLeft: Int, promiseGenerator: @escaping () -> Promise, resolver: PromiseResolver<T, E>) {
@@ -107,7 +112,17 @@ extension Promise {
   
   
   
-  
+  /// Creates retry promise based off given promise
+  ///
+  /// This will create a Promise that can recover from failure.
+  /// Generator is used to create action promise that can fail. Since Promise retains
+  /// it's failure status, need to create new filable action Promise on every attempt.
+  /// Resulting Promise will wait repeat up until `count` retries after which will reject
+  /// with the error underlying process was rejected with.
+  /// - Parameters:
+  ///   - count: number of attempts to try.
+  ///   - promiseGenrator: function generating new Promise to try.
+  /// - Returns: new Promise instance.
   public static func attempt2(times count: UInt, promiseGenrator: @escaping () -> Promise) -> Promise {
     guard count > 0 else { return promiseGenrator() }
     
