@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A51132561F559B9200E9D6AF /* TestPromiseScheduling.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B62D241F39ECDE00CFF565 /* TestPromiseScheduling.swift */; };
 		A57655931F16CE3A0085B45C /* Promise.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A57655891F16CE3A0085B45C /* Promise.framework */; };
 		A57655981F16CE3A0085B45C /* PromiseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57655971F16CE3A0085B45C /* PromiseTests.swift */; };
 		A576559A1F16CE3A0085B45C /* Promise.h in Headers */ = {isa = PBXBuildFile; fileRef = A576558C1F16CE3A0085B45C /* Promise.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -529,7 +530,7 @@
 			files = (
 				A57655981F16CE3A0085B45C /* PromiseTests.swift in Sources */,
 				A5FDAE441F1EB79A00B1C8CE /* PrimseSideEffects.swift in Sources */,
-				A5B62D251F39ECDE00CFF565 /* TestPromiseScheduling.swift in Sources */,
+				A51132561F559B9200E9D6AF /* TestPromiseScheduling.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
