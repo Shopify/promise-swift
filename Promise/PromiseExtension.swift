@@ -13,15 +13,7 @@ public protocol DispatchQueueType {
   func asyncAfter(deadline: DispatchTime, execute work: DispatchWorkItem)
 }
 
-extension DispatchQueue: DispatchQueueType {
-//  public func async(execute work: @escaping () -> Void) {
-//    self.async(execute: work)
-//  }
-//  
-//  public func asyncAfter(deadline: DispatchTime, execute work: @escaping () -> Void) {
-//    self.asyncAfter(deadline: deadline, execute: work)
-//  }
-}
+extension DispatchQueue: DispatchQueueType {}
 
 extension Promise {
   
