@@ -8,6 +8,13 @@
 
 import Foundation
 
+public protocol DispatchQueueType {
+  func async(execute work: DispatchWorkItem)
+  func asyncAfter(deadline: DispatchTime, execute work: DispatchWorkItem)
+}
+
+extension DispatchQueue: DispatchQueueType {}
+
 extension Promise {
   
   
@@ -21,11 +28,32 @@ extension Promise {
   /// - Parameter queue: queue to schedule observers callback on
   /// - Returns: new `Promise` instance.
   
-  public func completeOn(queue: DispatchQueue) -> Promise {
+  public func completeOn(queue: DispatchQueueType) -> Promise {
     return Promise { resolver in
       self.whenComplete { result in
-        queue.async { resolver.complete(result) }
+        queue.async(execute: DispatchWorkItem { resolver.complete(result) } )
       }
+    }
+  }
+  
+  
+  /// Dispatch `Promise` async operation
+  ///
+  /// Creates new `Promise` whose start function dispatches execution of current `Promise`'s one on a
+  /// given GCD queue.
+  /// **Note**: this does not modify current `Promise`, only returned instance is guaranteed to
+  /// to use queue for scheduling.
+  ///
+  /// - Parameter queue: GCD queue to schedule start operation on
+  /// - Returns: new `Promise`instance.
+  
+  public func startOn(queue: DispatchQueueType) -> Promise {
+    return Promise { resolver in
+      let workItem = DispatchWorkItem {
+        self.whenComplete(callback: resolver.complete)
+      }
+      queue.async(execute: workItem)
+      resolver.onCancel = { self.cancel() }
     }
   }
   
@@ -40,12 +68,12 @@ extension Promise {
   ///   - queue: queue to schedule `dispatchAfter` on
   /// - Returns: new `Promise` instance.
   
-  public func delayed(for delay: DispatchTimeInterval, on queue: DispatchQueue = DispatchQueue.main) -> Promise {
+  public func delayed(for delay: DispatchTimeInterval, on queue: DispatchQueueType = DispatchQueue.main) -> Promise {
     return Promise { resolver in
       self.whenComplete { result in
-        queue.asyncAfter(deadline: .now() + delay) {
+        queue.asyncAfter(deadline: .now() + delay, execute: DispatchWorkItem {
           resolver.complete(result)
-        }
+        })
       }
     }
   }
