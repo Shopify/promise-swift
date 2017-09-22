@@ -53,7 +53,7 @@ func makeAsyncPromise<V>(result: Result<V, TestError>, delay: DispatchTimeInterv
 
 class PromiseTests: XCTestCase {
     
-    func XCTAssertPromiseResult<V: Equatable, E: Error&Equatable>(
+    func XCTAssertPromiseResult<V: Equatable, E: Equatable>(
         _ promise: Promise<V, E>,
         result: Result<V, E>,
         after delay: TimeInterval,
@@ -73,11 +73,11 @@ class PromiseTests: XCTestCase {
     }
     
     
-    func XCTAssertPromiseValue<V: Equatable, E: Error & Equatable>(_ promise:Promise<V, E>, value:V, after delay: TimeInterval, file: StaticString = #file, line: UInt = #line) {
+    func XCTAssertPromiseValue<V: Equatable, E: Equatable>(_ promise:Promise<V, E>, value:V, after delay: TimeInterval, file: StaticString = #file, line: UInt = #line) {
         XCTAssertPromiseResult(promise, result: .success(value), after: delay, file: file, line: line)
     }
     
-    func XCTAssertPromiseError<V: Equatable, E: Error & Equatable>(_ promise:Promise<V, E>, error: E, after delay: TimeInterval, file: StaticString = #file, line: UInt = #line) {
+    func XCTAssertPromiseError<V: Equatable, E: Equatable>(_ promise:Promise<V, E>, error: E, after delay: TimeInterval, file: StaticString = #file, line: UInt = #line) {
         XCTAssertPromiseResult(promise, result: .error(error), after: delay, file: file, line: line)
     }
     
