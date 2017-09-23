@@ -1,7 +1,6 @@
 language: objective-c
 osx_image: 
-    -  xcode8.3
-    -  xcode9.0
+    -  xcode9
 rvm:
     2.2.5
 
