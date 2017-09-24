@@ -88,7 +88,7 @@ extension Promise {
   ///   - p2: Promise
   ///   - queue: queue to schedule resulting `Promise` complete callback on
   /// - Returns: new `Promise` instance
-  public static func all<T1, T2, E: Error>(_ p1: Promise<T1, E>, _ p2: Promise<T2, E>, on queue: DispatchQueue = DispatchQueue.main) -> Promise<(T1, T2), E> {
+  public static func all<T1, T2, E>(_ p1: Promise<T1, E>, _ p2: Promise<T2, E>, on queue: DispatchQueue = DispatchQueue.main) -> Promise<(T1, T2), E> {
     
     let erased = [
       p1.map(transform: Box.init),
@@ -111,7 +111,7 @@ extension Promise {
   ///   - queue: queue to schedule resulting `Promise` complete callback on
   /// - Returns: new `Promise` instance
 
-  public static func all<T1, T2, T3, E: Error>(_ p1: Promise<T1, E>, _ p2: Promise<T2, E>, _ p3: Promise<T3, E>, on queue: DispatchQueue = DispatchQueue.main) -> Promise<(T1, T2, T3), E> {
+  public static func all<T1, T2, T3, E>(_ p1: Promise<T1, E>, _ p2: Promise<T2, E>, _ p3: Promise<T3, E>, on queue: DispatchQueue = DispatchQueue.main) -> Promise<(T1, T2, T3), E> {
     
     let erased = [
       p1.map(transform: Box.init),
@@ -136,7 +136,7 @@ extension Promise {
   ///   - queue: queue to schedule resulting `Promise` complete callback on
   /// - Returns: new `Promise` instance
 
-  public static func all<T1, T2, T3, T4, E: Error>(_ p1: Promise<T1, E>, _ p2: Promise<T2, E>, _ p3: Promise<T3, E>,_ p4: Promise<T4, E>, on queue: DispatchQueue = DispatchQueue.main) -> Promise<(T1, T2, T3, T4), E> {
+  public static func all<T1, T2, T3, T4, E>(_ p1: Promise<T1, E>, _ p2: Promise<T2, E>, _ p3: Promise<T3, E>,_ p4: Promise<T4, E>, on queue: DispatchQueue = DispatchQueue.main) -> Promise<(T1, T2, T3, T4), E> {
     
     let erased = [
       p1.map(transform: Box.init),

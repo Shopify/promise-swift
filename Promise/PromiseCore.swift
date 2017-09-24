@@ -164,6 +164,7 @@ final public class Promise<T, E: Error> {
   /// - Returns: self instance of `Promise` that can be ignored. Used for call chaning purposes.
   @discardableResult
   public func whenComplete(callback: @escaping PromiseCallback<T, E>) -> Self {
+    var needsAutostart = false
     state.modify {
       switch $0 {
       case .pending, .executing:
@@ -174,28 +175,30 @@ final public class Promise<T, E: Error> {
       }
       
       if case .pending = $0 {
-        start()
+        needsAutostart = true
       }
     }
+    if needsAutostart { start() }
     return self
   }
   
   func start() {
+    let resolver = PromiseResolver { result in
+     self.state.modify { $0 = .complete(result) }
+    }
+    
+    var startFunc: (PromiseResolver<T, E>) -> Void = {_ in }
+    
     self.state.modify { state in
       guard case .pending(let start, let callbacks) = state else { return }
-      
-      func complete(result: Result<T, E>) {
-        self.state.modify { $0 = .complete(result) }
-      }
-      
-      let resolver = PromiseResolver(complete: complete)
+            
       let cancel: PromiseCancelFunction  = {
         resolver.onCancel?()
       }
       state = .executing(cancel, callbacks)
-      
-      start(resolver)
+      startFunc = start
     }
+    startFunc(resolver)
   }
   
   private func notifyObservers(_ callbacks: [PromiseCallback<T, E>],  with result: Result<T, E>) {

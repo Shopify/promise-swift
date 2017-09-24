@@ -11,7 +11,7 @@ import Promise
 
 class PrimseSideEffects: XCTestCase {
   
-  func verifyOnStart<T, E: Error>(for promise: Promise<T,E>, file: StaticString = #file, line:UInt = #line) {
+  func verifyOnStart<T, E>(for promise: Promise<T,E>, file: StaticString = #file, line:UInt = #line) {
     var called = false
     promise
       .onStart {_ in called = true }
@@ -19,7 +19,7 @@ class PrimseSideEffects: XCTestCase {
     XCTAssertTrue(called, file: file, line: line)
   }
   
-  func verifyOnComplete<T, E: Error>(called: Bool, for promise: Promise<T,E>, timeout: DispatchTimeInterval = .milliseconds(0), file: StaticString = #file, line:UInt = #line) {
+  func verifyOnComplete<T, E>(called: Bool, for promise: Promise<T,E>, timeout: DispatchTimeInterval = .milliseconds(0), file: StaticString = #file, line:UInt = #line) {
     var actualCalled = false
     let exp = expectation(description: "waiting")
     promise
@@ -47,7 +47,7 @@ class PrimseSideEffects: XCTestCase {
   }
   
   
-  func verifyOnSuccess<T: Equatable, E: Error>(_ called: CallResut<T>, for promise: Promise<T,E>, timeout: DispatchTimeInterval = .milliseconds(0), file: StaticString = #file, line:UInt = #line) {
+  func verifyOnSuccess<T, E>(_ called: CallResut<T>, for promise: Promise<T,E>, timeout: DispatchTimeInterval = .milliseconds(0), file: StaticString = #file, line:UInt = #line) {
     var actualValue: CallResut<T> = .notCalled
     let exp = expectation(description: "waiting")
     promise
@@ -61,7 +61,7 @@ class PrimseSideEffects: XCTestCase {
     XCTAssertEqual(actualValue, called, file: file, line: line)
   }
   
-  func verifyOnError<T, E: Error & Equatable>(_ called: CallResut<E>, for promise: Promise<T,E>, timeout: DispatchTimeInterval = .milliseconds(0), file: StaticString = #file, line:UInt = #line) {
+  func verifyOnError<T, E>(_ called: CallResut<E>, for promise: Promise<T,E>, timeout: DispatchTimeInterval = .milliseconds(0), file: StaticString = #file, line:UInt = #line) {
     var actualValue: CallResut<E> = .notCalled
     let exp = expectation(description: "waiting")
     promise

@@ -10,7 +10,7 @@ import Foundation
 
 extension Promise {
   
-  private func commonThen<T1, E1: Error>(transform: @escaping (Result<T, E>) -> Promise<T1, E1>) -> Promise<T1, E1> {
+  private func commonThen<T1, E1>(transform: @escaping (Result<T, E>) -> Promise<T1, E1>) -> Promise<T1, E1> {
     return Promise<T1, E1> { resolver in
       let serialQueue = DispatchQueue(label: "serialiazation")
       
@@ -76,7 +76,7 @@ extension Promise {
   /// - Parameter transform: function creating next `Promise` in the sequence.
   /// - Returns: `Promise` instance that represents result of sequence of async operations.
   
-  public func ifErrorThen<EV: Error>(transform: @escaping (E) -> Promise<T, EV>) -> Promise<T, EV> {
+  public func ifErrorThen<EV>(transform: @escaping (E) -> Promise<T, EV>) -> Promise<T, EV> {
     return self.commonThen { result in
       switch result {
       case .success(let v):

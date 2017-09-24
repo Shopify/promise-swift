@@ -9,7 +9,7 @@
 import Foundation
 
 final class Atomic<Value> {
-  private let lock = NSRecursiveLock()
+  private let lock = NSLock()
   private var _value: Value
   private let didSetCallback: ((Value, Value) -> Void)?
   
