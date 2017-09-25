@@ -29,8 +29,8 @@ final class Atomic<Value> {
     let oldValue = _value
     lock.lock()
     defer {
-      didSetCallback?(oldValue, _value)
       lock.unlock()
+      didSetCallback?(oldValue, _value)
     }
     
     return try action(&_value)
