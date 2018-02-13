@@ -80,8 +80,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		A54096041F32420E005EB55D /* killme.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = killme.h; sourceTree = "<group>"; };
-		A54096051F32420E005EB55D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A57655891F16CE3A0085B45C /* Promise.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Promise.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A576558C1F16CE3A0085B45C /* Promise.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Promise.h; sourceTree = "<group>"; };
 		A576558D1F16CE3A0085B45C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -162,21 +160,11 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		A54096031F32420E005EB55D /* killme */ = {
-			isa = PBXGroup;
-			children = (
-				A54096041F32420E005EB55D /* killme.h */,
-				A54096051F32420E005EB55D /* Info.plist */,
-			);
-			path = killme;
-			sourceTree = "<group>";
-		};
 		A576557F1F16CE3A0085B45C = {
 			isa = PBXGroup;
 			children = (
 				A576558B1F16CE3A0085B45C /* Promise */,
 				A57655961F16CE3A0085B45C /* PromiseTests */,
-				A54096031F32420E005EB55D /* killme */,
 				A576558A1F16CE3A0085B45C /* Products */,
 				A5FF4B121F321F7900921161 /* Frameworks */,
 			);
