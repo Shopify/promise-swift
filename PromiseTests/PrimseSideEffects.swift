@@ -14,7 +14,7 @@ class PrimseSideEffects: XCTestCase {
   func verifyOnStart<T, E>(for promise: Promise<T,E>, file: StaticString = #file, line:UInt = #line) {
     var called = false
     promise
-      .onStart {_ in called = true }
+      .onStart { called = true }
       .whenComplete {_ in }
     XCTAssertTrue(called, file: file, line: line)
   }

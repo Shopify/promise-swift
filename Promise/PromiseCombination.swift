@@ -54,7 +54,7 @@ extension Promise {
       }
       
       group.notify(queue: queue) {
-        resolver.resolve(with: results.flatMap { $0 } )
+        resolver.resolve(with: results.compactMap { $0 } )
       }
       
       resolver.onCancel = {
