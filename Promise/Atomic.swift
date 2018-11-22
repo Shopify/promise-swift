@@ -43,4 +43,13 @@ final class Atomic<Value> {
     
     return try action(_value)
   }
+  
+  
+  public func withValue(_ action: (Value) throws -> Void) rethrows {
+    lock.lock()
+    defer { lock.unlock() }
+    
+    try action(_value)
+  }
+  
 }

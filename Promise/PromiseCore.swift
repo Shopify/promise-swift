@@ -178,11 +178,24 @@ final public class Promise<T, E: Error> {
         needsAutostart = true
       }
     }
-    if needsAutostart { start() }
+    if needsAutostart { executeStart() }
     return self
   }
   
-  func start() {
+  public func start() {
+    var pending = false
+    
+    state.withValue { value in
+      if case .pending = value {
+        pending = true
+      }
+    }
+    
+    guard pending else { return }
+    executeStart()
+  }
+  
+  func executeStart() {
     let resolver = PromiseResolver { result in
      self.state.modify { $0 = .complete(result) }
     }
@@ -191,7 +204,7 @@ final public class Promise<T, E: Error> {
     
     self.state.modify { state in
       guard case .pending(let start, let callbacks) = state else { return }
-            
+      
       let cancel: PromiseCancelFunction  = {
         resolver.onCancel?()
       }
