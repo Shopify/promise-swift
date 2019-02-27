@@ -38,7 +38,7 @@ fileprivate enum PromiseState<T, E: Error> {
 
 /// Manual promise resolver.
 /// 
-/// You don't create an instance of resolver mannually. `Promise` provides 
+/// You don't create an instance of resolver manually. `Promise` provides 
 /// instance of resolver in async operation wrapper closure so caller can manually resolve or reject 
 /// `Promise` when async operation is finished.
 /// Also, `PromiseResolver` bears cancellation action, so you async operation can inject custom 
@@ -94,7 +94,7 @@ public class PromiseResolver<T, E: Error> {
 
 /// Promise 
 ///
-/// Represnts value that may be available in future.
+/// Represents value that may be available in future.
 
 final public class Promise<T, E: Error> {
   
@@ -124,7 +124,7 @@ final public class Promise<T, E: Error> {
   
   /// Creates rejected `Promise` with error result of given value
   ///
-  /// - Parameter error: error that is emmediately available.
+  /// - Parameter error: error that is immediately available.
   public convenience init(error: E) {
     self.init(state: .complete(.error(error)))
   }
@@ -158,7 +158,7 @@ final public class Promise<T, E: Error> {
   /// 
   /// Adds callback to observe result of the `Promise` (either resolution or rejection).
   /// Callback given may be called synchronously upon calling `whenComplete` (if the result is already available).
-  /// May be called on any thread, depending on which thread asynchronous operation notified about availbale result.
+  /// May be called on any thread, depending on which thread asynchronous operation notified about available result.
   ///
   /// - Parameter callback: function to be called when result is available.
   /// - Returns: self instance of `Promise` that can be ignored. Used for call chaning purposes.
@@ -210,7 +210,7 @@ final public class Promise<T, E: Error> {
   
   /// Cancels executing `Promise`
   /// 
-  /// If the `Promise` is alreadt canceled — does nothing.
+  /// If the `Promise` is already canceled — does nothing.
   /// If the `Promise` is currently executing — calls cancellation action (providing via `onCancel` property of resolver)
   /// and ignores any subsequent attempts to resolve or reject `resolver` from asynchronous operation.
   /// `whenComplete` is guaranteed to never be called after `cancel` was called.

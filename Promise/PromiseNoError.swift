@@ -13,9 +13,9 @@ extension Promise where E == NoError {
   
   /// Subscribes to `Promise` result unwrapping the value.
   ///
-  /// This method invokes `whenComplete` e.g. autostarts Promise if it hasnt' been started yet.
+  /// This method invokes `whenComplete` e.g. autostarts Promise if it hasn't been started yet.
   /// Since this `Promise`type guarantees it never rejects, this method automatically unwraps 
-  /// `result` type etracting resolution value.
+  /// `result` type extracting resolution value.
   ///
   /// - Parameter callback: subscription callback to invoked when `Promise` completes.
   /// - Parameter value: value `Promise` has been resolved with.
@@ -56,7 +56,7 @@ extension Promise {
   ///
   /// Creates new `Promise` that ignores any error completion and does nothing in that case.
   /// E.g. it eats errors.
-  /// In case current `Promise` resolves, resulting `Promise` behaviour is equivalent to current one.
+  /// In case current `Promise` resolves, resulting `Promise` behavior is equivalent to current one.
   ///
   /// - Returns: new `Promise` instance
   

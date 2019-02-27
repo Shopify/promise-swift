@@ -22,7 +22,7 @@ extension Promise {
   /// - Parameters:
   ///   - promises: array of Promises whose results to combine.
   ///   - queue: queue to schedule combined promises complete event on
-  /// - Returns: new `Promise`instance
+  /// - Returns: new `Promise` instance
   
   public static func all<S: Sequence>(_ promises: S, on queue: DispatchQueue = DispatchQueue.main) -> Promise<[T], E> where S.Iterator.Element == Promise<T, E> {
     return Promise<[T], E> { resolver in
@@ -80,7 +80,7 @@ extension Promise {
   /// Combines 2 `Promise`s together
   ///
   /// Creates new `Promise` that starts given `Promise`s upon first subscription,
-  /// resoles with tuple of values that are resultion values of given `Promise`, as soon as they are resolved.
+  /// resolves with tuple of values that are resolution values of given `Promise`, as soon as they are resolved.
   /// In case any of the given `Promise`s rejects with error — resulting Promise immediately rejects with that error as well.
   ///
   /// - Parameters:
@@ -101,7 +101,7 @@ extension Promise {
   /// Combines 3 `Promise`s together
   ///
   /// Creates new `Promise` that starts given `Promise`s upon first subscription,
-  /// resoles with tuple of values that are resultion values of given `Promise`, as soon as they are resolved.
+  /// resolves with tuple of values that are resolution values of given `Promise`, as soon as they are resolved.
   /// In case any of the given `Promise`s rejects with error — resulting Promise immediately rejects with that error as well.
   ///
   /// - Parameters:
@@ -125,7 +125,7 @@ extension Promise {
   /// Combines 4 `Promise`s together
   ///
   /// Creates new `Promise` that starts given `Promise`s upon first subscription,
-  /// resoles with tuple of values that are resultion values of given `Promise`, as soon as they are resolved.
+  /// resolves with tuple of values that are resolution values of given `Promise`, as soon as they are resolved.
   /// In case any of the given `Promise`s rejects with error — resulting Promise immediately rejects with that error as well.
   ///
   /// - Parameters:
