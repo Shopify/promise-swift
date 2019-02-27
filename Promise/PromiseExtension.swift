@@ -45,7 +45,7 @@ extension Promise {
   /// to use queue for scheduling.
   ///
   /// - Parameter queue: GCD queue to schedule start operation on
-  /// - Returns: new `Promise`instance.
+  /// - Returns: new `Promise` instance.
   
   public func startOn(queue: DispatchQueueType) -> Promise {
     return Promise { resolver in

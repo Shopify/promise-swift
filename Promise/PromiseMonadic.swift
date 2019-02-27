@@ -64,7 +64,7 @@ extension Promise {
   }
   
   
-  /// romise transformation using asynchronous error transformation
+  /// promise transformation using asynchronous error transformation
   ///
   /// Technically, this chaning works the same way as `then` except in case current `Promise` rejects with error
   /// In practice, this could be used as async computation failure recovery. 
