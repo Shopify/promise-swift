@@ -67,7 +67,7 @@ class PromiseTests: XCTestCase {
       exp.fulfill()
     }
     
-    wait(for: [exp], timeout: delay)
+    wait(for: [exp], timeout: delay + 0.05)
     XCTAssert(expected?.isEqual(to: result) ?? false, file: file, line: line)
     
   }
