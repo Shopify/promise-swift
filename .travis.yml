@@ -1,10 +1,11 @@
 language: objective-c
-osx_image: xcode9.3
+osx_image: xcode11.1
 rvm:
     2.2.5
 
 before_install:
     - gem install xcpretty
 script:
-    - set -o pipefail && xcodebuild test -project Promise.xcodeproj -scheme Promise-iOS -destination 'platform=iOS Simulator,name=iPhone SE' | xcpretty -c 
-    - set -o pipefail && xcodebuild test -project Promise.xcodeproj -scheme Promise-macOS -destination 'platform=OS X,arch=x86_64' | xcpretty -c 
+    - swift package generate-xcodeproj
+    - set -o pipefail && xcodebuild test -project Promise-swift.xcodeproj -scheme Promise-swift-Package -destination 'platform=iOS Simulator,name=iPhone 8' | xcpretty -c 
+    - set -o pipefail && xcodebuild test -project Promise-swift.xcodeproj -scheme Promise-swift-Package -destination 'platform=macOS,arch=x86_64' | xcpretty -c 
