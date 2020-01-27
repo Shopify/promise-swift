@@ -26,7 +26,7 @@ extension Promise where E == NoError {
     return self.whenComplete { result in
       switch result {
       case .success(let v): callback(v)
-      case .error: fatalError()
+      case .failure: fatalError()
       }
     }
   }

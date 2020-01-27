@@ -23,5 +23,6 @@ let package = Package(
         "Promise",
       ]
     ),
-  ]
+  ],
+  swiftLanguageVersions: [.v5]
 )

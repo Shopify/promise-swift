@@ -86,7 +86,7 @@ public class PromiseResolver<T, E: Error> {
   /// - Parameter error: error value for promise to be rejected with
   
   public func reject(with error: E) {
-    complete(.error(error))
+    complete(.failure(error))
   }
   
 }
@@ -126,7 +126,7 @@ final public class Promise<T, E: Error> {
   ///
   /// - Parameter error: error that is emmediately available.
   public convenience init(error: E) {
-    self.init(state: .complete(.error(error)))
+    self.init(state: .complete(.failure(error)))
   }
   
   

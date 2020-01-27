@@ -46,7 +46,7 @@ extension Promise {
               results[index] = value
             }
             group.leave()
-          case .error(let e):
+          case .failure(let e):
             cancelOthers(index)
             resolver.reject(with: e)
           }

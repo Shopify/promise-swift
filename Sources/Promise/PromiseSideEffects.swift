@@ -62,7 +62,7 @@ extension Promise {
     return self.onComplete { result in
       switch result {
       case .success(let value): action(value)
-      case .error: break
+      case .failure: break
       }
     }
   }
@@ -78,7 +78,7 @@ extension Promise {
   public func onError(do action: @escaping (_ error: E) -> Void) -> Promise {
     return self.onComplete { result in
       switch result {
-      case .error(let error): action(error)
+      case .failure(let error): action(error)
       case .success: break
       }
     }

@@ -57,7 +57,7 @@ extension Promise {
       switch result {
       case .success(let value):
         return transform(value)
-      case .error(let e):
+      case .failure(let e):
         return Promise<V, E>(error: e)
       }
     }
@@ -81,7 +81,7 @@ extension Promise {
       switch result {
       case .success(let v):
         return Promise<T, EV>(value: v)
-      case .error(let e):
+      case .failure(let e):
         return transform(e)
       }
     }

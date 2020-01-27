@@ -9,11 +9,11 @@
 import XCTest
 import Promise
 
-extension Result where T: Equatable, E: Equatable {
+extension Result where Success: Equatable, Failure: Equatable {
   func isEqual(to result: Result) -> Bool {
     switch (self, result) {
     case (.success(let lhs), .success(let rhs)): return lhs == rhs
-    case (.error(let lhs), .error(let rhs)): return lhs == rhs
+    case (.failure(let lhs), .failure(let rhs)): return lhs == rhs
     default: return false
     }
   }
@@ -78,7 +78,7 @@ class PromiseTests: XCTestCase {
   }
   
   func XCTAssertPromiseError<V: Equatable, E: Equatable>(_ promise:Promise<V, E>, error: E, after delay: TimeInterval, file: StaticString = #file, line: UInt = #line) {
-    XCTAssertPromiseResult(promise, result: .error(error), after: delay, file: file, line: line)
+    XCTAssertPromiseResult(promise, result: .failure(error), after: delay, file: file, line: line)
   }
   
   
@@ -184,7 +184,7 @@ class PromiseTests: XCTestCase {
   }
   
   func testIfErrorThen() {
-    let promise = makeAsyncPromise(result: .error(.error1), delay: .milliseconds(100))
+    let promise = makeAsyncPromise(result: .failure(.error1), delay: .milliseconds(100))
       .ifErrorThen { _ in
         return makeAsyncPromise(result: .success(42), delay: .milliseconds(100))
     }
@@ -232,7 +232,7 @@ class PromiseTests: XCTestCase {
       .map { index, delay in
         makeAsyncPromise(result: .success(index), delay: .milliseconds(delay))
     }
-    let failePromise: Promise<Int, TestError> = makeAsyncPromise(result: .error(.error1), delay: .milliseconds(50))
+    let failePromise: Promise<Int, TestError> = makeAsyncPromise(result: .failure(.error1), delay: .milliseconds(50))
     
     let all = Promise.all([promises, [failePromise]].joined()).map(transform: EquatableArray.init)
     XCTAssertPromiseError(all, error: .error1, after: 0.100)
@@ -245,7 +245,7 @@ class PromiseTests: XCTestCase {
         exp.fulfill()
       }
     }
-    let failPromise: Promise<Int, TestError> = makeAsyncPromise(result: .error(.error1), delay: .milliseconds(50))
+    let failPromise: Promise<Int, TestError> = makeAsyncPromise(result: .failure(.error1), delay: .milliseconds(50))
     
     
     let all = Promise.all([successPromise, failPromise])
